@@ -11,3 +11,5 @@ steps:
 # Push image
 - push:
   - {{.Run.Registry}}/hello-world:{{.Run.ID}}
+# Deploy with Resource Manager template
+- cmd: az deployment group create --resource-group luftdicht-test --template-file staging-luftdicht.json
