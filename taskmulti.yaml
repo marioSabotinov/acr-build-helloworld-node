@@ -13,3 +13,43 @@ steps:
   - {{.Run.Registry}}/hello-world:{{.Run.ID}}
 # Deploy with Resource Manager template
 #- cmd: az deployment group create --resource-group luftdicht-test --template-file staging-luftdicht.json
+"$schema": https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#
+contentVersion: 1.0.0.0
+parameters:
+  containerGroups_acr_tasks_name:
+    defaultValue: acr-tasks
+    type: String
+variables: {}
+resources:
+- type: Microsoft.ContainerInstance/containerGroups
+  apiVersion: '2019-12-01'
+  name: "[parameters('containerGroups_acr_tasks_name')]"
+  location: westeurope
+  properties:
+    sku: Standard
+    containers:
+    - name: "[parameters('containerGroups_acr_tasks_name')]"
+      properties:
+        image: luftdicht.azurecr.io/hello-world:cb26
+        ports:
+        - protocol: TCP
+          port: 80
+        environmentVariables: []
+        resources:
+          requests:
+            memoryInGB: 1.5
+            cpu: 1
+    initContainers: []
+    imageRegistryCredentials:
+    - server: luftdicht.azurecr.io
+      username: luftdicht
+      password: s/es2K3sYmUxn/MuSjdBmhaaqML5rRqf
+    restartPolicy: Always
+    ipAddress:
+      ports:
+      - protocol: TCP
+        port: 80
+      ip: 51.145.187.28
+      type: Public
+      dnsNameLabel: "[concat(parameters('containerGroups_acr_tasks_name'), '-luftdicht')]"
+    osType: Linux
