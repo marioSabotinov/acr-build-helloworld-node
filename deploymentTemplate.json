@@ -18,7 +18,7 @@
 			"containers": [{
 				"name": "[parameters('containerGroups_acr_tasks_name')]",
 				"properties": {
-					"image": "luftdicht.azurecr.io/helloworld:cb23",
+					"image": "luftdicht.azurecr.io/hello-world:cb26",
 					"ports": [{
 						"protocol": "TCP",
 						"port": 80
