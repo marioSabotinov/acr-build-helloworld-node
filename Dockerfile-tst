@@ -1,5 +1,5 @@
 FROM node:9-alpine
-ENV NODE_VERSION 9.11.2 deploy with json template 222222222
+ENV NODE_VERSION 9.11.2 deploy with json template 5555555555555555
 
 COPY . /src
 RUN cd /src && npm install
